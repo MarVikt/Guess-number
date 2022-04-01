@@ -1,8 +1,11 @@
-// число загадано один раз, а пользователь пытается угадать его до тех пор, пока не угадает
-function guessNumber(myNumber) {
-  function askUser() {
+// число загадано один раз, а пользователь пытается угадать его до тех пор, пока не угадает, или не нажмёт Отмена
+let checkNum;
+
+function guessNumber() {
+  const myNumber = Math.floor(Math.random() * 100) + 1;
+  console.log(myNumber);
+  return function askUser() {
     let userNumber = prompt("Загадано целое число от 1 до 100. Угадайте его!");
-    // console.log(userNumber + " type " + typeof userNumber);
     if (userNumber === null) {
       alert("Игра окончена");
     } else if (isNaN(userNumber) || userNumber.trim() === "") {
@@ -22,12 +25,12 @@ function guessNumber(myNumber) {
           alert("Поздравляю, Вы угадали!!!  Это число " + myNumber);
         }
       } else {
-        alert('Число должно быть от 1 до 100');
+        alert("Число должно быть от 1 до 100");
         askUser();
       }
     }
-  }
-  askUser();
+  };
 }
 
-guessNumber(44);
+checkNum = guessNumber();
+checkNum();
