@@ -1,3 +1,4 @@
+// число загадано один раз, а пользователь пытается угадать его до тех пор, пока не угадает
 function guessNumber(myNumber) {
   function askUser() {
     let userNumber = prompt("Загадано целое число от 1 до 100. Угадайте его!");
