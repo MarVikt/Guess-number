@@ -1,16 +1,16 @@
-// число загадано один раз, а пользователь пытается угадать его до тех пор, пока не угадает, или не нажмёт Отмена
 let checkNum;
-let playAgain = false;
 
 function guessNumber (triesNumber) {
   const myNumber = Math.floor(Math.random() * 100) + 1;
   console.log(myNumber);
   function askUser() {
+    console.log('triesNumber = ' + triesNumber);
+
     if (triesNumber > 0) {
       let userNumber = prompt("Загадано целое число от 1 до 100. Угадайте его!");
       if (userNumber === null) {
         alert("Игра окончена");
-        playAgain = false;
+        return false;
       } else if (isNaN(userNumber) || userNumber.trim() === "") {
         alert("Введите число!");
         askUser();
@@ -18,7 +18,7 @@ function guessNumber (triesNumber) {
         userNumber = Number(userNumber);
         triesNumber --;
         if (userNumber === myNumber) {
-          playAgain = confirm("Поздравляю, Вы угадали!!!  Это число " + myNumber + '. Хотели бы сыграть ещё?');
+          return confirm("Поздравляю, Вы угадали!!!  Это число " + myNumber + '. Хотели бы сыграть ещё?');
         } else {
           if (userNumber >= 1 && userNumber <= 100) {
             if (userNumber < myNumber) {
@@ -33,13 +33,17 @@ function guessNumber (triesNumber) {
         }
       }
     } else {
-      playAgain = confirm("Попытки закончились. Хотите сыграть еще?");
+      return confirm("Попытки закончились. Хотите сыграть еще?");
     }
 
   }
 
-  askUser();
-  if (playAgain) guessNumber(10);
+  if (askUser()) {
+    triesNumber = 10;
+    console.log('triesNumber == ' + triesNumber);
+    guessNumber(triesNumber);
+  }
 }
 
 checkNum = guessNumber(10);
+// checkNum();
